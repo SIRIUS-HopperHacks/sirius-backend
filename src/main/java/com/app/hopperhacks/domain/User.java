@@ -19,44 +19,44 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_code")
-    private Long user_code;
+    @Column(name="userCode")
+    private Long userCode;
 
-    @Column(name="user_name", nullable = false)
-    private String user_name;
+    @Column(name="userName", nullable = false)
+    private String userName;
 
-    @Column(name="user_id", unique = true, nullable = false)
-    private String user_id;
+    @Column(name="userId", unique = true, nullable = false)
+    private String userId;
 
-    @Column(name="user_password", nullable = false)
+    @Column(name="userPassword", nullable = false)
     @JsonIgnore
-    private String user_password;
+    private String userPassword;
 
     @Transient
     @ToString.Exclude
     @JsonIgnore
-    private String user_repassword;
+    private String userRepassword;
 
-    @Column(name="user_age", nullable=true)
-    private int user_age;
+    @Column(name="userAge", nullable=true)
+    private int userAge;
 
-    @Column(name="user_phone", nullable=true, length=11)
-    private int user_phone;
+    @Column(name="userPhone", nullable=true, length=11)
+    private int userPhone;
 
-    @Column(name="user_gender", nullable=true)
-    private String user_gender;
+    @Column(name="userGender", nullable=true)
+    private String userGender;
 
-    @Column(name="user_addr1", nullable=true)
-    private String user_addr1;
+    @Column(name="userAddr1", nullable=true)
+    private String userAddr1;
 
-    @Column(name="user_addr2", nullable=true)
-    private String user_addr2;
+    @Column(name="userAddr2", nullable=true)
+    private String userAddr2;
 
-    @Column(name="user_addr3", nullable=true)
-    private String user_addr3;
+    @Column(name="userAddr3", nullable=true)
+    private String userAddr3;
 
-    @Column(name="user_zipcode", nullable=true)
-    private int user_zipcode;
+    @Column(name="userZipcode", nullable=true)
+    private int userZipcode;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @ToString.Exclude

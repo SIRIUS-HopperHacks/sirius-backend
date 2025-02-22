@@ -5,7 +5,6 @@ import com.app.hopperhacks.domain.Board;
 import com.app.hopperhacks.domain.User;
 import com.app.hopperhacks.repository.BoardRepository;
 import com.app.hopperhacks.repository.UserRepository;
-import org.apache.tomcat.util.http.fileupload.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,13 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BoardService {
@@ -40,7 +36,7 @@ public class BoardService {
     @Transactional
     public List<Board> board_detail(Long board_code){
         List<Board> list = new ArrayList<>();
-        Board board = boardRepository.findByBoard_code(board_code);
+        Board board = boardRepository.findByBoardCode(board_code);
 
         if(board != null){
             boardRepository.saveAndFlush(board);
@@ -52,7 +48,7 @@ public class BoardService {
     public int board_write(Board board){
         User user = null; //TODO 현재 로그인한 사용자 정보
 
-        user = userRepository.findByUser_code(user.getUser_code());
+        user = userRepository.findByUserCode(user.getUserCode());
         if (user != null){
             board.setUser(user);
             board = boardRepository.saveAndFlush(board);
@@ -105,13 +101,15 @@ public class BoardService {
         //해당 페이지의 글 목록 조회
         List<Board> list = pageBoard.getContent();
         model.addAttribute("board_list", list);
+
+        return list;
     }
 
     //단일 글 조회
     public List<Board> selectByBoard_code(Long board_code){
         List<Board> list = new ArrayList<>();
 
-        Board board = boardRepository.findByBoard_code(board_code);
+        Board board = boardRepository.findByBoardCode(board_code);
         if(board != null){list.add(board);}
         return list;
     }
@@ -120,10 +118,10 @@ public class BoardService {
         int result = 0;
 
         //update 할 글 조회
-        Board prev_board = boardRepository.findByBoard_code(board.getBoard_code());
+        Board prev_board = boardRepository.findByBoardCode(board.getBoardCode());
         if(prev_board != null){
-            prev_board.setBoard_title(board.getBoard_title());
-            prev_board.setBoard_content(board.getBoard_content());
+            prev_board.setBoardTitle(board.getBoardTitle());
+            prev_board.setBoardContent(board.getBoardContent());
             boardRepository.save(prev_board);
             return 1;
         }
@@ -132,7 +130,7 @@ public class BoardService {
 
     public int board_delete(Long board_code){
         int result = 0;
-        Board board = boardRepository.findByBoard_code(board_code);
+        Board board = boardRepository.findByBoardCode(board_code);
         if(board!=null){
             boardRepository.delete(board);
             return 1;

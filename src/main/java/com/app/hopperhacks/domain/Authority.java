@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="auth_code")
-    private Long auth_code;
+    @Column(name="authCode")
+    private Long authCode;
 
-    @Column(name="auth_name", length=40, nullable=false, unique=true)
-    private String auth_name; //("MEMBER", "ADMIN")
+    @Column(name="authName", length=40, unique=true)
+    private String authName; //("MEMBER", "ADMIN")
 }

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -15,21 +16,20 @@ import java.time.LocalDateTime;
 public class item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="item_code")
-    private Long item_code;
+    @Column(name="itemCode")
+    private Long itemCode;
 
-    @Column(name="item_name", nullable = false)
-    private String item_name;
+    @Column(name="itemName", nullable = false)
+    private String itemName;
 
-    @Column(name = "item_description", nullable = true, length=500)
-    private String item_description;
+    @Column(name = "itemDescription", nullable = true, length=500)
+    private String itemDescription;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="item_regTime", columnDefinition = "datetime default now()", updatable = false)
-    private LocalDateTime item_regTime;
+    @Column(name="itemRegTime", columnDefinition = "timestamp default current_timestamp", updatable = false)
+    private LocalDateTime itemRegTime;
 
-    @Column(name="item_info", length=500)
-    private String item_info;
+    @Column(name="itemInfo", length=500)
+    private String itemInfo;
 
 
 }

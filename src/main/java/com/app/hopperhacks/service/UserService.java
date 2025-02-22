@@ -26,7 +26,7 @@ public class UserService {
 
 
     public boolean isExist(String user_id){
-        User user = userRepository.findByUser_id(user_id);
+        User user = userRepository.findByUserId(user_id);
         return user != null;
     }
 
@@ -34,7 +34,7 @@ public class UserService {
     public int register(User user){
         user = userRepository.save(user); //저장 후 user_code 값 반환
 
-        Authority auth = authorityRepository.findByAuth_name("MEMBER");
+        Authority auth = authorityRepository.findByAuthName("MEMBER");
         user.addAuthority(auth);
         userRepository.save(user);
         return 1;
@@ -42,7 +42,7 @@ public class UserService {
 
     // 특정 사용자(code)의 권한
     public List<Authority> selectAuthorityByUser_code(Long user_code){
-        User user = userRepository.findByUser_code(user_code);
+        User user = userRepository.findByUserCode(user_code);
 
         if(user != null) return user.getAuthorities();
 

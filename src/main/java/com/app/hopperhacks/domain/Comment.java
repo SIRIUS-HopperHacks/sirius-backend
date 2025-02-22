@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -17,27 +18,26 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="comment_code")
-    private Long comment_code;
+    @Column(name="commentCode")
+    private Long commentCode;
 
-    @Column(name="comment_content", nullable=false)
-    private String comment_content;
+    @Column(name="commentContent", nullable=false)
+    private String commentContent;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="comment_time", columnDefinition = "datetime default now()", updatable = false)
-    private LocalDateTime comment_time;
+    @Column(name="commentTime", columnDefinition = "timestamp default current_timestamp", updatable = false)
+    private LocalDateTime commentTime;
 
-    @Column(name="comment_like", nullable=true, columnDefinition = "int default 0")
-    private int comment_like;
+    @Column(name="commentLike", nullable=true, columnDefinition = "integer default 0")
+    private int commentLike;
 
-    @Column(name="comment_dislike", nullable=true, columnDefinition = "int default 0")
-    private int comment_dislike;
+    @Column(name="commentDislike", nullable=true, columnDefinition = "integer default 0")
+    private int commentDislike;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_code", referencedColumnName = "user_code")
+    @JoinColumn(name="userCode", referencedColumnName = "userCode")
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="board_code", referencedColumnName = "board_code")
+    @JoinColumn(name="boardCode", referencedColumnName = "boardCode")
     private Board board;
 }

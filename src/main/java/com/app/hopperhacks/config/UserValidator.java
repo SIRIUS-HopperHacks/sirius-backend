@@ -20,7 +20,7 @@ public class UserValidator implements Validator {
         User user = (User) target;
 
         //이름 공백 판별
-        String user_name = user.getUser_name();
+        String user_name = user.getUserName();
         if (user_name == null || user_name.trim().isEmpty()) {
             errors.rejectValue("user_name","space is not available.");
         }
@@ -29,7 +29,7 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"user_password", "password is mendatory.");
 
         //입력 paassword, re_password 가 동일한지 비교
-        if(!user.getUser_password().equals(user.getUser_repassword())){
+        if(!user.getUserPassword().equals(user.getUserRepassword())){
             errors.rejectValue("user_repassword", "password doesn't match");
         }
     }

@@ -22,25 +22,24 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="board_code")
-    private Long board_code;
+    @Column(name="boardCode")
+    private Long boardCode;
 
 
-    @Column(name="board_title", nullable = false, length = 300)
-    private String board_title;
+    @Column(name="boardTitle", nullable = false, length = 300)
+    private String boardTitle;
 
-    @Column(name="board_title", nullable=true)
-    private String board_content;
+    @Column(name="boardContent", nullable=true)
+    private String boardContent;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="board_time", columnDefinition = "datetime default now()", updatable = false)
+    @Column(name="boardTime", columnDefinition = "timestamp default current_timestamp", updatable = false)
     //@Column(columnDefinition="datetime(6) default now(6)")
-    private LocalDateTime board_time;
+    private LocalDateTime boardTime;
 
-    @Column(name="board_like", nullable = true, columnDefinition = "int default 0")
-    private int board_like; //TODO 한계정당 한번만 누를수 있게 할건지, 아님 무한클릭 되게할건지
-    @Column(name="board_dislike", nullable = true, columnDefinition = "int default 0")
-    private int board_dislike; //TODO
+    @Column(name="boardLike", nullable = true, columnDefinition = "int default 0")
+    private int boardLike; //TODO 한계정당 한번만 누를수 있게 할건지, 아님 무한클릭 되게할건지
+    @Column(name="boardDislike", nullable = true, columnDefinition = "int default 0")
+    private int boardDislike; //TODO
     // 한계정당 한번만 누르게 하려면 어느 USER가 어느 BOARD에 좋아요를 했는지를 따로 테이블 파서 기록해야됨
     /*
     LIKE_DISLIKE_TABLE 예시
@@ -52,6 +51,6 @@ public class Board {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_code", referencedColumnName = "user_code")
+    @JoinColumn(name="userCode", referencedColumnName = "userCode")
     private User user;
 }

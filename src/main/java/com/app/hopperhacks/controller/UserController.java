@@ -37,14 +37,14 @@ public class UserController {
     @PostMapping("/register")
     public String registerSuccess(@Valid User user, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         //아이디 중복검사
-        if(!result.hasFieldErrors("user_id") && userService.isExist(user.getUser_id())){
+        if(!result.hasFieldErrors("user_id") && userService.isExist(user.getUserId())){
             result.rejectValue("user_id","id already exists");
         }
 
         //검증 에러시 redirect
         if(result.hasErrors()){
-            redirectAttributes.addFlashAttribute("user_id", user.getUser_id());
-            redirectAttributes.addFlashAttribute("user_name", user.getUser_name());
+            redirectAttributes.addFlashAttribute("user_id", user.getUserId());
+            redirectAttributes.addFlashAttribute("user_name", user.getUserName());
 
             List<FieldError> errList = result.getFieldErrors();
             for(FieldError err: errList){
