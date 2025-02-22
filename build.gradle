@@ -45,6 +45,9 @@ dependencies {
     // Development Tools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+    //postgreSQL
+    implementation group: 'org.postgresql', name:'postgresql', version: '42.2.19'
+
     // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
