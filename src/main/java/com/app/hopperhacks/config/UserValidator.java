@@ -11,7 +11,7 @@ public class UserValidator implements Validator {
     public boolean supports(Class<?> clazz){
         System.out.println("###LOG : supports("+clazz.getName()+")");
         boolean result = User.class.isAssignableFrom(clazz);
-        System.out.println(result);
+        System.out.println("###LOG : result : "+result);
         return result;
     }
 
