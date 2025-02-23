@@ -11,4 +11,7 @@ COPY --from=builder /app/build/libs/*.jar app.jar
 EXPOSE 10000
 CMD ["java", "-jar", "app.jar"]
 
-# Terminal에서 입력 / git action ->  docker build -t sirius:latest .
+# Run on terminal: Build Image, Run(Check) Container, Deploy Image
+# docker build -t seongminsohn/sirius:latest .
+# docker run -d -p 10000:10000 --name sirius_app seongminsohn/sirius:latest
+# docker push seongminsohn/sirius:latest

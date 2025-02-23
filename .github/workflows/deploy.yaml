@@ -5,7 +5,7 @@ on:
     branches:
       - master
     types:
-      - closed  # PR이 닫히면(merge 시) 트리거됨
+      - closed  # Triggered when PR is closed (merged)
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Generate application.yaml from template
         run: |
-          envsubst < src/main/resources/application.yaml.template > src/main/resources/application.yaml
+          envsubst < src/main/resources/application-template.yml > src/main/resources/application.yml
         env:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
