@@ -3,6 +3,8 @@ package com.app.sirius.controller;
 import com.app.sirius.config.AdminValidator;
 import com.app.sirius.domain.Admin;
 import com.app.sirius.service.AdminService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,22 +21,26 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
+@Tag(name = "Admin API", description = "Admin Functions API")
 public class AdminController {
     private AdminService adminService;
 
     public AdminController() {System.out.println("###LOG : "+getClass().getName() + "() 생성");}
 
     @GetMapping("/login")
+    @Operation(summary = "Admin Login", description = "Endpoint for admin login. Session information will be stored upon successful login.")
     public void login(){
         //TODO : 세션에 로그인 정보 저장
     }
 
-    @GetMapping
+    @GetMapping("/register")
+    @Operation(summary = "Display Registration Page", description = "Navigates to the admin registration page.")
     public String register(){
-        return "/login";
+        return "/register";
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Register Admin", description = "Registers a new admin and stores session information.")
     public String registerSuccess(@Valid Admin admin, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         //아이디 중복검사
         if(!result.hasFieldErrors("email") && adminService.isExist(admin.getEmail())){
