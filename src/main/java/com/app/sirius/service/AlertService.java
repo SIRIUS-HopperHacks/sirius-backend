@@ -30,7 +30,6 @@ public class AlertService {
     @Autowired
     private void setAdminRepository(AdminRepository adminRepository){this.adminRepository= adminRepository;}
 
-    @Autowired
     public AlertService(){System.out.println("###LOG : AlertService() 생성");}
 
     @Transactional

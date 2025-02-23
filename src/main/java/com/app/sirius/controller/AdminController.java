@@ -31,10 +31,12 @@ public class AdminController {
 
     @GetMapping("/login")
     @Operation(summary = "Admin Login", description = "Endpoint for admin login. Session information will be stored upon successful login.")
-    public void login(){}
+    public String login(){
+        return "/login";
+    }
 
-    @PostMapping("/loginSuccess")
-    public String loginSuccess(Admin admin, HttpSession session){
+    @PostMapping("/login")
+    public String login(Admin admin, HttpSession session){
         if (adminService.findOne(admin) == 1) {
             session.setAttribute("adminId",admin.getAdminId());
             return "/home";
@@ -69,9 +71,6 @@ public class AdminController {
             }
             return "redirect:/admin/register";
         }
-
-        //TODO
-        //비밀번호 특수문자 포함여부나 글자수 등의 추가 검사
 
         String page = "/admin/registerSuccess";
         int cnt = adminService.register(admin);

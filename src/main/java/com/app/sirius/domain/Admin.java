@@ -27,16 +27,10 @@ public class Admin {
     @JsonIgnore
     private String password;
 
-    @Transient
-    @ToString.Exclude
-    @JsonIgnore
-    private String repassword;
-
     @Column(name="organization_type", nullable=false)
     private String organizationType;
 
-    //@Temporal(TemporalType.TIMESTAMP)
-    @Column(name="created_time", nullable=false, columnDefinition = "timestamp default current_timestamp")
+    @Column(name="created_time", columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime createdTime;
 
 }

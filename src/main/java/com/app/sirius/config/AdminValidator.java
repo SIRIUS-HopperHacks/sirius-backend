@@ -47,13 +47,5 @@ public class AdminValidator implements Validator {
                 }
             }
         }
-
-        // Validate password fields
-        if (admin.getPassword() == null || admin.getPassword().trim().isEmpty()) {
-            errors.rejectValue("password", "password is mandatory.");
-        }
-        if (!admin.getPassword().equals(admin.getRepassword())) {
-            errors.rejectValue("repassword", "Passwords do not match.");
-        }
     }
 }
