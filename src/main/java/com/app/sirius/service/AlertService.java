@@ -1,10 +1,10 @@
-package com.app.hopperhacks.service;
+package com.app.sirius.service;
 
-import com.app.hopperhacks.config.Pagination;
-import com.app.hopperhacks.domain.Admin;
-import com.app.hopperhacks.domain.Alert;
-import com.app.hopperhacks.repository.AdminRepository;
-import com.app.hopperhacks.repository.AlertRepository;
+import com.app.sirius.config.Pagination;
+import com.app.sirius.domain.Admin;
+import com.app.sirius.domain.Alert;
+import com.app.sirius.repository.AdminRepository;
+import com.app.sirius.repository.AlertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

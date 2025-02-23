@@ -1,8 +1,8 @@
-package com.app.hopperhacks.controller;
+package com.app.sirius.controller;
 
-import com.app.hopperhacks.config.AdminValidator;
-import com.app.hopperhacks.domain.Admin;
-import com.app.hopperhacks.service.AdminService;
+import com.app.sirius.config.AdminValidator;
+import com.app.sirius.domain.Admin;
+import com.app.sirius.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

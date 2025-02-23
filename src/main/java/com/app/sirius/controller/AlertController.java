@@ -1,6 +1,6 @@
-package com.app.hopperhacks.controller;
+package com.app.sirius.controller;
 
-import com.app.hopperhacks.service.AlertService;
+import com.app.sirius.service.AlertService;
 import com.sun.net.httpserver.HttpContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.app.hopperhacks.config;
+package com.app.sirius.config;
 
 public class Pagination {
     public static final Integer ALERT_PAGES = 10;

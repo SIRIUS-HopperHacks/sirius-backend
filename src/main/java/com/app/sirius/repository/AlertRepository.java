@@ -1,6 +1,6 @@
-package com.app.hopperhacks.repository;
+package com.app.sirius.repository;
 
-import com.app.hopperhacks.domain.Alert;
+import com.app.sirius.domain.Alert;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AlertRepository extends JpaRepository<Alert, Long> {

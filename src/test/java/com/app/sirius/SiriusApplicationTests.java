@@ -1,10 +1,10 @@
-package com.app.hopperhacks;
+package com.app.sirius;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HopperHacksApplicationTests {
+class SiriusApplicationTests {
 
     @Test
     void contextLoads() {

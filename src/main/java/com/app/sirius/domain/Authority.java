@@ -1,4 +1,4 @@
-package com.app.hopperhacks.domain;
+package com.app.sirius.domain;
 
 
 import lombok.*;

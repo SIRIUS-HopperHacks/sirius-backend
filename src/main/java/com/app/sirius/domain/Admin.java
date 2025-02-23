@@ -1,4 +1,4 @@
-package com.app.hopperhacks.domain;
+package com.app.sirius.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Admin {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="AdminId", unique = true, nullable = false)
+    @Column(name="adminId", unique = true, nullable = false)
     private Long adminId; //code값
 
     @Column(name="email", nullable = false)

@@ -33,8 +33,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'net.coobird:thumbnailator:0.4.8'
 
-    // Database
-    runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+    //postgreSQL
+    implementation group: 'org.postgresql', name:'postgresql', version: '42.2.19'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
@@ -44,9 +44,6 @@ dependencies {
 
     // Development Tools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
-    //postgreSQL
-    implementation group: 'org.postgresql', name:'postgresql', version: '42.2.19'
 
     // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

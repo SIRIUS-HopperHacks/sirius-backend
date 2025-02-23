@@ -1,6 +1,6 @@
-package com.app.hopperhacks.repository;
+package com.app.sirius.repository;
 
-import com.app.hopperhacks.domain.Admin;
+import com.app.sirius.domain.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdminRepository extends JpaRepository<Admin,Long> {

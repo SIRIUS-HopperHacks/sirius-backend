@@ -1,4 +1,4 @@
-package com.app.hopperhacks.domain;
+package com.app.sirius.domain;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 @Entity
-@Table(name="tb_aler")
+@Table(name="tb_alert")
 public class Alert {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

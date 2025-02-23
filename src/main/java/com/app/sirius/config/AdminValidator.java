@@ -1,6 +1,6 @@
-package com.app.hopperhacks.config;
+package com.app.sirius.config;
 
-import com.app.hopperhacks.domain.Admin;
+import com.app.sirius.domain.Admin;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -29,7 +29,7 @@ public class AdminValidator implements Validator {
         //TODO : 이메일형태 확인
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"email","email cannot be empty.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"password", "password is mendatory.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"password", "password is mandatory.");
 
         //입력 paassword, re_password 가 동일한지 비교
         if(!admin.getPassword().equals(admin.getRepassword())){
