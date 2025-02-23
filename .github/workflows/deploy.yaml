@@ -3,7 +3,7 @@ name: Deploy Sirius App to Docker Hub
 on:
   pull_request:
     branches:
-      - main
+      - master
     types:
       - closed # Trigger when the PR is closed (merged)
 
