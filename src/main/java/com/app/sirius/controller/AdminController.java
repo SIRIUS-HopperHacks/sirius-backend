@@ -101,12 +101,13 @@ public class AdminController {
         int cnt = adminService.register(admin);
         if (cnt > 0) {
             response.put("status","success");
+            response.put("status","confirmed");
+            response.put("admin_id", admin.getAdminId());
+            response.put("email", admin.getEmail());
+            response.put("password", admin.getPassword());
+            response.put("organization_type", admin.getOrganizationType());
+            if ( admin.getCreatedTime()!=null) {response.put("created_time", admin.getCreatedTime());}
         }
-        response.put("admin_id", admin.getAdminId());
-        response.put("email", admin.getEmail());
-        response.put("password", admin.getPassword());
-        response.put("organization_type", admin.getOrganizationType());
-        if ( admin.getCreatedTime()!=null) {response.put("created_time", admin.getCreatedTime());}
         return ResponseEntity.ok(response);
     }
 }
