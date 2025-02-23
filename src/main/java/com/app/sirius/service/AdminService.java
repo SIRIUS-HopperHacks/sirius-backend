@@ -27,4 +27,10 @@ public class AdminService {
         admin = adminRepository.save(admin); //저장 후 id 값 반환
         return 1;
     }
+
+    public int findOne(Admin admin){
+        Admin admin_result = adminRepository.findByAdminId(admin.getAdminId());
+        if (admin_result != null) return 1;
+        return 0;
+    }
 }

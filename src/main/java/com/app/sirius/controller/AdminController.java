@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -27,11 +28,20 @@ public class AdminController {
 
     public AdminController() {System.out.println("###LOG : "+getClass().getName() + "() 생성");}
 
+
     @GetMapping("/login")
     @Operation(summary = "Admin Login", description = "Endpoint for admin login. Session information will be stored upon successful login.")
-    public void login(){
-        //TODO : 세션에 로그인 정보 저장
+    public void login(){}
+
+    @PostMapping("/loginSuccess")
+    public String loginSuccess(Admin admin, HttpSession session){
+        if (adminService.findOne(admin) == 1) {
+            session.setAttribute("adminId",admin.getAdminId());
+            return "/home";
+        }
+        else return "/loginfail";
     }
+
 
     @GetMapping("/register")
     @Operation(summary = "Display Registration Page", description = "Navigates to the admin registration page.")
