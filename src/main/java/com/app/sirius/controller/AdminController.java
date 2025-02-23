@@ -2,9 +2,11 @@ package com.app.sirius.controller;
 
 import com.app.sirius.config.AdminValidator;
 import com.app.sirius.domain.Admin;
+import com.app.sirius.domain.LoginRequest;
 import com.app.sirius.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,7 @@ import java.util.Map;
 @RequestMapping("/admin")
 @Tag(name = "Admin API", description = "Admin Functions API")
 public class AdminController {
+    @Autowired
     private AdminService adminService;
 
     public AdminController() {System.out.println("###LOG : "+getClass().getName() + "() 생성");}
@@ -37,8 +40,8 @@ public class AdminController {
     @PostMapping("/login")
     @ResponseBody
     @Operation(summary = "Admin Login", description = "Endpoint for admin login. Session information will be stored upon successful login.")
-    public ResponseEntity<Map<String,Object>> login(String email, String password){
-        Admin admin = adminService.findByEmail(email);
+    public ResponseEntity<Map<String,Object>> login(@RequestParam LoginRequest loginRequest){
+        Admin admin = adminService.findByEmail(loginRequest.getEmail());
         Map<String,Object> response = new HashMap<>();
 
         if (admin!=null) {
