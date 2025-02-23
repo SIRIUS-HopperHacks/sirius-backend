@@ -40,7 +40,7 @@ public class AdminController {
     @PostMapping("/login")
     @ResponseBody
     @Operation(summary = "Admin Login", description = "Endpoint for admin login. Session information will be stored upon successful login.")
-    public ResponseEntity<Map<String,Object>> login(@RequestParam LoginRequest loginRequest){
+    public ResponseEntity<Map<String,Object>> login(@RequestBody LoginRequest loginRequest){
         Admin admin = adminService.findByEmail(loginRequest.getEmail());
         Map<String,Object> response = new HashMap<>();
 
