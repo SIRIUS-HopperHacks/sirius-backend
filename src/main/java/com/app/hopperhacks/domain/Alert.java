@@ -30,7 +30,7 @@ public class Alert {
     @Column(name="alertType")
     private String alertType;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
     @Column(name="alertedTime", nullable=false, columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime alertedTime;
 

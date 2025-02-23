@@ -35,7 +35,7 @@ public class Admin {
     @Column(name="organizationType", nullable=false)
     private String organizationType;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
     @Column(name="createdTime", nullable=false, columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime createdTime;
 
