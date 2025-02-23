@@ -36,6 +36,9 @@ dependencies {
     //postgreSQL
     implementation group: 'org.postgresql', name:'postgresql', version: '42.2.19'
 
+    // SpringDoc OpenAPI (Swagger UI)
+    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
