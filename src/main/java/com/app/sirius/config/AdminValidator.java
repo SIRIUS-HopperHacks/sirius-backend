@@ -13,6 +13,7 @@ public class AdminValidator implements Validator {
         System.out.println("###LOG : supports("+clazz.getName()+")");
         boolean result = Admin.class.isAssignableFrom(clazz);
         System.out.println("###LOG : result : "+result);
+        System.out.println("###LOG : result : "+result);
         return result;
     }
 
