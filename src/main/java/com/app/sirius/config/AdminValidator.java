@@ -2,38 +2,65 @@ package com.app.sirius.config;
 
 import com.app.sirius.domain.Admin;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.util.regex.Pattern;
 
 public class AdminValidator implements Validator {
 
+    // Pattern for validating the local part of the email:
+    // Allowed characters: A-Z, a-z, 0-9, ., _, %, +, -
+    private static final Pattern LOCAL_PATTERN = Pattern.compile("^[A-Za-z0-9._%+-]+$");
+
+    // Pattern for validating the domain part of the email:
+    // Domain must end with ".gov"
+    private static final Pattern DOMAIN_PATTERN = Pattern.compile("^[A-Za-z0-9.-]+\\.gov$");
+
     @Override
-    public boolean supports(Class<?> clazz){
-        System.out.println("###LOG : supports("+clazz.getName()+")");
+    public boolean supports(Class<?> clazz) {
+        System.out.println("###LOG : supports(" + clazz.getName() + ")");
         boolean result = Admin.class.isAssignableFrom(clazz);
-        System.out.println("###LOG : result : "+result);
+        System.out.println("###LOG : result : " + result);
         return result;
     }
 
     @Override
-    public void validate(Object target, Errors errors){
+    public void validate(Object target, Errors errors) {
         Admin admin = (Admin) target;
-
-        //이름 공백 판별
         String email = admin.getEmail();
+
+        // Validate that email is not null or empty
         if (email == null || email.trim().isEmpty()) {
-            errors.rejectValue("email","space is not available.");
+            errors.rejectValue("email", "email cannot be empty.");
+        } else {
+            int atIndex = email.indexOf('@');
+            if (atIndex == -1) {
+                errors.rejectValue("email", "Invalid email format: missing '@' symbol.");
+            } else {
+                String localPart = email.substring(0, atIndex);
+                String domainPart = email.substring(atIndex + 1);
+
+                // Check the length of local part
+                if (localPart.length() > 64) {
+                    errors.rejectValue("email", "Less than 64 characters are allowed for the email address");
+                }
+                // Validate the local part
+                if (!LOCAL_PATTERN.matcher(localPart).matches()) {
+                    errors.rejectValue("email", "Invalid characters in the email address.");
+                }
+                // Validate the domain part
+                if (!DOMAIN_PATTERN.matcher(domainPart).matches()) {
+                    errors.rejectValue("email", "Invalid domain type.");
+                }
+            }
         }
 
-        //TODO : 이메일형태 확인
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"email","email cannot be empty.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"password", "password is mandatory.");
-
-        //입력 paassword, re_password 가 동일한지 비교
-        if(!admin.getPassword().equals(admin.getRepassword())){
-            errors.rejectValue("repassword", "password doesn't match");
+        // Validate password fields
+        if (admin.getPassword() == null || admin.getPassword().trim().isEmpty()) {
+            errors.rejectValue("password", "password is mandatory.");
+        }
+        if (!admin.getPassword().equals(admin.getRepassword())) {
+            errors.rejectValue("repassword", "Passwords do not match.");
         }
     }
 }
