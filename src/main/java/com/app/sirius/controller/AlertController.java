@@ -35,7 +35,7 @@ public class AlertController {
         alertService.list(page,model);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     @Operation(summary = "Delete Alert", description = "Deletes an alert by its ID and returns a deletion result page.")
     public String deleteSuccess(long alertId, Model model){
         model.addAttribute("result", alertService.delete(alertId));
