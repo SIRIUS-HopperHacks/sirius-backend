@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,6 +32,7 @@ public class AdminController {
 
     public AdminController() {System.out.println("###LOG : "+getClass().getName() + "() 생성");}
 
+    private static final Pattern LOCAL_PATTERN = Pattern.compile("^[A-Za-z0-9._%+-]+$");
 
     @GetMapping("/login")
     public String login(){
@@ -67,35 +69,44 @@ public class AdminController {
     @PostMapping("/register")
     @ResponseBody
     @Operation(summary = "Register Admin", description = "Registers a new admin and stores session information.")
-    public String registerSuccess(@RequestBody Admin admin, BindingResult result, Model model, RedirectAttributes redirectAttributes){
-        //아이디 중복검사
-        if(!result.hasFieldErrors("email") && adminService.isExist(admin.getEmail())){
-            result.rejectValue("email","email already exists");
+    public ResponseEntity<Map<String, Object>> registerSuccess(@RequestBody Admin admin){
+        Map<String, Object> response = new HashMap<>();
+
+        if(adminService.isExist(admin.getEmail())){
+            response.put("status","failed. email already exists");
         }
 
-        //검증 에러시 redirect
-        if(result.hasErrors()){
-            redirectAttributes.addFlashAttribute("adminId", admin.getAdminId());
-            redirectAttributes.addFlashAttribute("email", admin.getEmail());
+        String email = admin.getEmail();
+        if (email == null || email.trim().isEmpty()) {
+            response.put("status", "failed. email cannot be empty");
+        } else {
+            int atIndex = email.indexOf('@');
+            if (atIndex == -1) {
+                response.put("status", "failed. Invalid email format: missing '@' symbol");
+            } else {
+                String localPart = email.substring(0, atIndex);
+                String domainPart = email.substring(atIndex + 1);
 
-            List<FieldError> errList = result.getFieldErrors();
-            for(FieldError err: errList){
-                redirectAttributes.addFlashAttribute("error", err.getCode());
-                break;
+                // Check the length of local part
+                if (localPart.length() > 64) {
+                    response.put("status", "failed. Less than 64 characters are allowed for the email address");
+                }
+                // Validate the local part
+                else if (!LOCAL_PATTERN.matcher(localPart).matches()) {
+                    response.put("status", "failed. Invalid characters in the email address");
+                }
             }
-            return "redirect:/admin/register";
         }
 
-        String page = "/admin/registerSuccess";
         int cnt = adminService.register(admin);
-        model.addAttribute("result",cnt);
-        return page;
-
+        if (cnt > 0) {
+            response.put("status","success");
+        }
+        response.put("admin_id", admin.getAdminId());
+        response.put("email", admin.getEmail());
+        response.put("password", admin.getPassword());
+        response.put("organization_type", admin.getOrganizationType());
+        if ( admin.getCreatedTime()!=null) {response.put("created_time", admin.getCreatedTime());}
+        return ResponseEntity.ok(response);
     }
-
-    /*
-    @InitBinder
-    public void initBinder(WebDataBinder binder){binder.setValidator(new AdminValidator());}
-    */
-
 }
