@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Admin {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="adminId", unique = true, nullable = false)
+    @Column(name="admin_id", unique = true, nullable = false)
     private Long adminId; //code값
 
     @Column(name="email", nullable = false)
@@ -32,11 +32,11 @@ public class Admin {
     @JsonIgnore
     private String repassword;
 
-    @Column(name="organizationType", nullable=false)
+    @Column(name="organization_type", nullable=false)
     private String organizationType;
 
     //@Temporal(TemporalType.TIMESTAMP)
-    @Column(name="createdTime", nullable=false, columnDefinition = "timestamp default current_timestamp")
+    @Column(name="created_time", nullable=false, columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime createdTime;
 
 }
