@@ -31,4 +31,9 @@ public class AdminService {
         if (admin_result != null) return 1;
         return 0;
     }
+
+    public Admin findByEmail(String email){
+        Admin admin = adminRepository.findByEmail(email);
+        return admin;
+    }
 }

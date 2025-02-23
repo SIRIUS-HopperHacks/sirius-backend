@@ -24,7 +24,6 @@ public class Admin {
     private String email;
 
     @Column(name="password", nullable = false)
-    @JsonIgnore
     private String password;
 
     @Column(name="organization_type", nullable=false)

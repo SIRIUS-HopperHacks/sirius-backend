@@ -2,28 +2,31 @@ package com.app.sirius.controller;
 
 import com.app.sirius.config.AdminValidator;
 import com.app.sirius.domain.Admin;
+import com.app.sirius.domain.LoginRequest;
 import com.app.sirius.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
 @Tag(name = "Admin API", description = "Admin Functions API")
 public class AdminController {
+    @Autowired
     private AdminService adminService;
 
     public AdminController() {System.out.println("###LOG : "+getClass().getName() + "() 생성");}
@@ -35,13 +38,23 @@ public class AdminController {
     }
 
     @PostMapping("/login")
+    @ResponseBody
     @Operation(summary = "Admin Login", description = "Endpoint for admin login. Session information will be stored upon successful login.")
-    public String login(Admin admin, HttpSession session){
-        if (adminService.findOne(admin) == 1) {
-            session.setAttribute("adminId",admin.getAdminId());
-            return "/home";
+    public ResponseEntity<Map<String,Object>> login(@RequestParam LoginRequest loginRequest){
+        Admin admin = adminService.findByEmail(loginRequest.getEmail());
+        Map<String,Object> response = new HashMap<>();
+
+        if (admin!=null) {
+            response.put("status","confirmed");
+            response.put("adminId", admin.getAdminId());
+            response.put("email", admin.getEmail());
+            response.put("password", admin.getPassword());
+            response.put("organizationType", admin.getOrganizationType());
+            response.put("createdTime", admin.getCreatedTime());
+
         }
-        else return "/loginfail";
+        else response.put("status","denied");
+        return ResponseEntity.ok(response);
     }
 
 
