@@ -2,7 +2,7 @@
 FROM gradle:7.6-jdk17 AS builder
 WORKDIR /app
 COPY . .
-RUN gradle build -x test
+RUN gradle build
 
 # Stage 2: 최종 런타임
 FROM openjdk:17-jdk-slim
