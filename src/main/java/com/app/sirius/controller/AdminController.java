@@ -65,8 +65,9 @@ public class AdminController {
     }
 
     @PostMapping("/register")
+    @ResponseBody
     @Operation(summary = "Register Admin", description = "Registers a new admin and stores session information.")
-    public String registerSuccess(@Valid Admin admin, BindingResult result, Model model, RedirectAttributes redirectAttributes){
+    public String registerSuccess(@RequestBody Admin admin, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         //아이디 중복검사
         if(!result.hasFieldErrors("email") && adminService.isExist(admin.getEmail())){
             result.rejectValue("email","email already exists");
@@ -92,6 +93,9 @@ public class AdminController {
 
     }
 
+    /*
     @InitBinder
     public void initBinder(WebDataBinder binder){binder.setValidator(new AdminValidator());}
+    */
+
 }
