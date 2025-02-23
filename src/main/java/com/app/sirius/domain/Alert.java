@@ -15,20 +15,19 @@ import java.time.LocalDateTime;
 public class Alert {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="alertId", unique=true, nullable=false)
+    @Column(name="alert_id", unique=true, nullable=false)
     private Long alertId;
 
-    @Column(name="deviceId",nullable=false)
+    @Column(name="device_id",nullable=false)
     private String deviceId;
 
-    @Column(name="deviceLocation", nullable=false)
+    @Column(name="device_location", nullable=false)
     private String deviceLocation;
 
-    @Column(name="alertType")
+    @Column(name="alert_type")
     private String alertType;
 
-    //@Temporal(TemporalType.TIMESTAMP)
-    @Column(name="alertedTime", nullable=false, columnDefinition = "timestamp default current_timestamp")
+    @Column(name="alerted_time", nullable=false, columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime alertedTime;
 
 
