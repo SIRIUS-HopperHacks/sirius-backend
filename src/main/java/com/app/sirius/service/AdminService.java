@@ -11,7 +11,7 @@ public class AdminService {
     @Autowired
     private AdminRepository adminRepository;
     @Autowired
-    public void setPlaceRepository(AdminRepository adminRepository){this.adminRepository = adminRepository;}
+    public void setAdminRepository(AdminRepository adminRepository){this.adminRepository = adminRepository;}
 
 
     public AdminService(){System.out.println("###LOG : "+getClass().getName()+"() 생성");}
