@@ -12,9 +12,6 @@ public class AdminValidator implements Validator {
     // Allowed characters: A-Z, a-z, 0-9, ., _, %, +, -
     private static final Pattern LOCAL_PATTERN = Pattern.compile("^[A-Za-z0-9._%+-]+$");
 
-    // Pattern for validating the domain part of the email:
-    // Domain must end with ".gov"
-    private static final Pattern DOMAIN_PATTERN = Pattern.compile("^[A-Za-z0-9.-]+\\.gov$");
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -47,10 +44,6 @@ public class AdminValidator implements Validator {
                 // Validate the local part
                 if (!LOCAL_PATTERN.matcher(localPart).matches()) {
                     errors.rejectValue("email", "Invalid characters in the email address.");
-                }
-                // Validate the domain part
-                if (!DOMAIN_PATTERN.matcher(domainPart).matches()) {
-                    errors.rejectValue("email", "Invalid domain type.");
                 }
             }
         }
