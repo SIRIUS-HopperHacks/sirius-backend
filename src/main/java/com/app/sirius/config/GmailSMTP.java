@@ -5,7 +5,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 public class GmailSMTP {
-    public static void main(String[] args) {
+    public static void send_gmail(String email, String otp) {
         final String username = "sirius20250223@gmail.com"; // 본인 Gmail
         final String password = "rpfp wbta wcrh ocnr";   // 앱 비밀번호 필요
 
@@ -27,10 +27,10 @@ public class GmailSMTP {
             message.setFrom(new InternetAddress("sirius20250223@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("wnsghd0902@gmail.com")
+                    InternetAddress.parse(email)
             );
-            message.setSubject("Test Mail");
-            message.setText("Hello, this is a test email from Java!");
+            message.setSubject("SIRIUS Register OTP Validation Code");
+            message.setText("Your OTP code is " + otp);
 
             Transport.send(message);
             System.out.println("Email Sent Successfully!");

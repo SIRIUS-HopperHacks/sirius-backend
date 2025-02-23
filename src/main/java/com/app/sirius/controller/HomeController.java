@@ -14,6 +14,8 @@ public class HomeController {
 
     @GetMapping("/home")
     @Operation(summary = "Display Home Page", description = "Renders the home page for general navigation.")
-    public void home(){}
+    public String home(){
+        return "redirect:/otp";
+    }
 
 }

@@ -21,11 +21,8 @@ public class Alert {
     @Column(name="deviceId",nullable=false)
     private String deviceId;
 
-    @Column(name="disasterLocation", nullable=false)
-    private String disasterLocation;
-
-    @Column(name="currentLocation", nullable=false)
-    private String currentLocation;
+    @Column(name="deviceLocation", nullable=false)
+    private String deviceLocation;
 
     @Column(name="alertType")
     private String alertType;
