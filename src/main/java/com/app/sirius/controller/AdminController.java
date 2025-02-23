@@ -30,12 +30,12 @@ public class AdminController {
 
 
     @GetMapping("/login")
-    @Operation(summary = "Admin Login", description = "Endpoint for admin login. Session information will be stored upon successful login.")
     public String login(){
         return "/login";
     }
 
     @PostMapping("/login")
+    @Operation(summary = "Admin Login", description = "Endpoint for admin login. Session information will be stored upon successful login.")
     public String login(Admin admin, HttpSession session){
         if (adminService.findOne(admin) == 1) {
             session.setAttribute("adminId",admin.getAdminId());
