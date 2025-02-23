@@ -13,9 +13,7 @@ public class AdminService {
     @Autowired
     public void setAdminRepository(AdminRepository adminRepository){this.adminRepository = adminRepository;}
 
-
     public AdminService(){System.out.println("###LOG : "+getClass().getName()+"() 생성");}
-
 
     public boolean isExist(String email){
         Admin admin = adminRepository.findByEmail(email);
